@@ -1,8 +1,6 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-  </div>
+<template lang="pug">
+  #app
+    h1 {{ msg }}
 </template>
 
 <script>
@@ -17,4 +15,5 @@ export default {
 </script>
 
 <style lang="scss">
+  @import './sass/main';
 </style>
