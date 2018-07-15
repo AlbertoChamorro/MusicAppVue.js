@@ -24,17 +24,9 @@
     export default {
       props: {
         track: { type: Object, required: true }
-      },
-      data () {
-        return {
-    
-        }
-      },
-      mounted () {
-        console.log('track', this.track)
       }
     }
 </script>
-<style lang="sass" scoped>
+<style lang="scss">
 
 </style>

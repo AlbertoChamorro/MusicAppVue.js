@@ -1,28 +1,31 @@
 <template lang="pug">
-  #app
+  #app.has-background-white-ter
     app-header
 
     section.section
       nav.nav.has-shadow
         .container
-            .columns
+            .columns.is-centered
               .column
-                .field.has-addons
-                  .control
-                    input.input.is-medium(
-                      type="text", 
-                      placeholder="Search music...", 
-                      v-model="searchText"
-                    )
-                  .control
-                    a.button.is-info.is-medium(@click="search") Search
-                  .control
-                    a.button.is-danger.is-medium(@click="clearSearch") &times;
-      .container              
-        p.searchResults {{ searchResults }}  
+                  .field.has-addons
+                    .control.is-expanded
+                        input.input.is-medium(
+                          type="text", 
+                          placeholder="Search music...", 
+                          v-model="searchText"
+                        )
+                    .control
+                      a.button.is-info.is-medium(@click="search") Search
+                    .control
+                      a.button.is-danger.is-medium(@click="clearSearch") &times;
+
+      .container
+        .columns.is-centered
+          .column 
+              p.searchResults.has-text-dark.is-pulled-left {{ searchResults }}  
 
       .container.containerMusic
-        .colums.is-multiline
+        .columns.is-multiline
           .column.is-one-quarter(v-for="track in tracks") 
             app-track(:track="track")
     
@@ -68,7 +71,8 @@
       }
     },
     created () {
-  
+      this.searchText = 'te amo'
+      this.search()
     }
   }
 </script>
@@ -77,11 +81,11 @@
     @import './sass/main';
 
     .searchResults{
-      margin-top: 2px;
+      margin-top: 4px;
       font-size: smaller;
     }
 
     .containerMusic{
-      margin-top: 32px;
+      margin-top: 64px;
     }
 </style>

@@ -1,6 +1,6 @@
 <template lang="pug">
     section.hero.is-success
-        .hero-head
+        .hero-head.space-hero
             header.nav
                 .container
                     .nav-left
@@ -14,3 +14,9 @@
 
                                
 </template>
+<style lang="scss" scoped>
+    .space-hero {
+        margin-top: 8px;
+    }
+</style>
+
