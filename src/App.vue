@@ -22,22 +22,23 @@
         p.searchResults {{ searchResults }}  
 
       .container.containerMusic
-        .colums
-          .column(v-for="track in tracks") 
-            | {{ track.name }} - {{ track.artists[0].name }}
+        .colums.is-multiline
+          .column.is-one-quarter(v-for="track in tracks") 
+            app-track(:track="track")
     
     app-footer
 
 </template>
 
 <script>
-  import trackService from './services/track-service'
-  import AppHeader from './components/layouts/Header.vue'
-  import AppFooter from './components/layouts/Footer.vue'
+  import trackService from '@/services/track-service'
+  import AppHeader from '@/components/layouts/Header.vue'
+  import AppFooter from '@/components/layouts/Footer.vue'
+  import AppTrack from '@/components/tracks/Track.vue'
 
   export default {
     name: 'app',
-    components: { AppHeader, AppFooter },
+    components: { AppHeader, AppFooter, AppTrack },
     data () {
       return {
         searchText: '',
@@ -66,7 +67,7 @@
         return `Se encontraron ${this.tracks.length} registros de canciones.`
       }
     },
-    mounted () {
+    created () {
   
     }
   }
