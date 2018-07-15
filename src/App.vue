@@ -1,7 +1,8 @@
 <template lang="pug">
   #app.has-background-white-ter
-    app-header
 
+    app-header
+        
     section.section
       nav.nav.has-shadow
         .container
@@ -21,6 +22,8 @@
                       a.button.is-danger.is-medium(@click="clearSearch")
                         i.fa.fa-times  
                         //-  &times; fa.fa-ban
+      
+      app-loader(v-show="isLoading")
 
       .container
         .columns.is-centered
@@ -41,14 +44,16 @@
   import AppHeader from '@/components/layouts/Header.vue'
   import AppFooter from '@/components/layouts/Footer.vue'
   import AppTrack from '@/components/tracks/Track.vue'
+  import AppLoader from '@/components/shared/Loader.vue'
 
   export default {
     name: 'app',
-    components: { AppHeader, AppFooter, AppTrack },
+    components: { AppHeader, AppFooter, AppTrack, AppLoader },
     data () {
       return {
         searchText: '',
-        tracks: []
+        tracks: [],
+        isLoading: false
       }
     },
     methods: {
@@ -57,9 +62,11 @@
           this.clearSearch()
           return
         }
+        this.isLoading = true
         trackService.getAll(this.searchText)
           .then(res => {
             // https://api.spotify.com/v1/search?query=the+be&type=track&offset=0&limit=20
+            this.isLoading = false
             this.tracks = res.tracks.items
           })
       },
