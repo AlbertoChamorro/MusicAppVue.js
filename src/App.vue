@@ -16,21 +16,17 @@
                     a.button.is-info.is-medium(@click="search") Search
                   .control
                     a.button.is-danger.is-medium(@click="clearSearch") &times;
-                  p.searchResults {{ searchResults }}  
+      .container              
+        p.searchResults {{ searchResults }}  
+
       .container.containerMusic
         .colums
-          .column(v-for="track in tracks") {{ track.name }} - {{ track.artist }}
+          .column(v-for="track in tracks") 
+            | {{ track.name }} - {{ track.artists[0].name }}
 </template>
 
 <script>
-  const tracks = [
-    { name: 'En los montes, en los valles', artist: 'Marcos Witt' },
-    { name: 'Cuan grande es el', artist: 'Crithian Lewis' },
-    { name: 'Cubreme', artist: 'Lilly Goodmand' },
-    { name: 'Supe que me amabas', artist: 'Marcela Gandara' },
-    { name: 'Tu estas aqui', artist: 'Jesus Adrian Romero & Marcela Gandara' },
-    { name: 'Mi herencia', artist: 'Jesus Adrian Romero' }
-  ]
+  import trackService from './services/track-service'
 
   export default {
     name: 'app',
@@ -42,7 +38,15 @@
     },
     methods: {
       search: function () {
-        this.tracks = tracks
+        if (!this.searchText) {
+          this.clearSearch()
+          return
+        }
+        trackService.getAll(this.searchText)
+          .then(res => {
+            // https://api.spotify.com/v1/search?query=the+be&type=track&offset=0&limit=20
+            this.tracks = res.tracks.items
+          })
       },
       clearSearch: function () {
         this.searchText = ''
@@ -64,8 +68,8 @@
     @import './sass/main';
 
     .searchResults{
-      margin-left: 10px;
-      margin-top: 10px;
+      margin-top: 2px;
+      font-size: smaller;
     }
 
     .containerMusic{
