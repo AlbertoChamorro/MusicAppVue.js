@@ -1,5 +1,7 @@
 <template lang="pug">
   #app
+    app-header
+
     section.section
       nav.nav.has-shadow
         .container
@@ -23,13 +25,19 @@
         .colums
           .column(v-for="track in tracks") 
             | {{ track.name }} - {{ track.artists[0].name }}
+    
+    app-footer
+
 </template>
 
 <script>
   import trackService from './services/track-service'
+  import AppHeader from './components/layouts/Header.vue'
+  import AppFooter from './components/layouts/Footer.vue'
 
   export default {
     name: 'app',
+    components: { AppHeader, AppFooter },
     data () {
       return {
         searchText: '',
