@@ -1,14 +1,11 @@
-import httpManagerService from './app-config-service'
+import commonApiService from './common-http-service'
 
 const trackService = {}
 
 trackService.getAll = function (q) {
   const type = 'track'
-
-  return httpManagerService.get('/search', {
-    params: { q, type }
-  })
-    .then(res => res.data)
+  const params = { q, type }
+  return commonApiService.get('/search', params)
 }
 
 export default trackService
