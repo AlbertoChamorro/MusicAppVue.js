@@ -15,9 +15,12 @@
                           v-model="searchText"
                         )
                     .control
-                      a.button.is-info.is-medium(@click="search") Search
+                      a.button.is-primary.is-medium(@click="search") 
+                        i.fa.fa-search
                     .control
-                      a.button.is-danger.is-medium(@click="clearSearch") &times;
+                      a.button.is-danger.is-medium(@click="clearSearch")
+                        i.fa.fa-times  
+                        //-  &times; fa.fa-ban
 
       .container
         .columns.is-centered
