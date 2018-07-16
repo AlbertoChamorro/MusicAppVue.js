@@ -22,18 +22,22 @@
                       a.button.is-danger.is-medium(@click="clearSearch")
                         i.fa.fa-times  
                         //-  &times; fa.fa-ban
-      
-      app-loader(v-show="isLoading")
 
       .container
         .columns.is-centered
           .column 
               p.searchResults.has-text-dark.is-pulled-left {{ searchResults }}  
 
+      app-loader(v-show="isLoading")
+
       .container.containerMusic
         .columns.is-multiline
           .column.is-one-quarter(v-for="track in tracks") 
-            app-track(:track="track")
+            app-track(
+                :class="{ 'isPlayMusic': track.id === selectedTrackId }"
+                :track="track" 
+                @play-music="playMusic"
+            )
     
     app-footer
 
@@ -53,6 +57,7 @@
       return {
         searchText: '',
         tracks: [],
+        selectedTrackId: null,
         isLoading: false
       }
     },
@@ -73,6 +78,10 @@
       clearSearch: function () {
         this.searchText = ''
         this.tracks = []
+      },
+      playMusic: function (id) {
+        console.log(`playing music ${id}`)
+        this.selectedTrackId = id
       }
     },
     computed: {
@@ -91,11 +100,15 @@
     @import './sass/main';
 
     .searchResults{
-      margin-top: 4px;
+      margin-top: -6px;
       font-size: smaller;
     }
 
     .containerMusic{
-      margin-top: 64px;
+      margin-top: 44px;
+    }
+
+    .isPlayMusic{
+        border: 3px #23d160 solid;
     }
 </style>
