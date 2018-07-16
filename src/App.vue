@@ -3,8 +3,10 @@
 
     app-header
     
-    app-notification(v-show="showNotification")
-      p(slot="message") No se encontraron resultados.
+    app-notification(:is-error="isError" v-show="notify")
+      p(slot="message") 
+        span(v-if="!isError") {{ searchResults }}
+        span(v-else) No se encontraron resultados.
 
     section.section
       nav.nav.has-shadow
@@ -63,7 +65,8 @@
         tracks: [],
         selectedTrackId: null,
         isLoading: false,
-        showNotification: false
+        isError: false,
+        notify: false
       }
     },
     methods: {
@@ -78,7 +81,8 @@
           .then(res => {
             // https://api.spotify.com/v1/search?query=the+be&type=track&offset=0&limit=20
             this.isLoading = false
-            this.showNotification = res.tracks.total === 0
+            this.isError = res.tracks.total === 0
+            this.notify = true
             this.tracks = res.tracks.items
           })
       },
@@ -92,10 +96,10 @@
       }
     },
     watch: {
-      showNotification () {
-        if (this.showNotification) {
+      notify () {
+        if (this.notify) {
           setTimeout(() => {
-            this.showNotification = false
+            this.notify = false
           }, 2500)
         }
       }
