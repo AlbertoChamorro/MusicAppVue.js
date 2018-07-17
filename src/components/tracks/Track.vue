@@ -29,6 +29,9 @@
       methods: {
         playMusic: function () {
           this.$emit('play-music', this.track.id)
+
+          // emit event bus for component any
+          this.$bus.$emit('play-music-handle', this.track)
         }
       }
     }

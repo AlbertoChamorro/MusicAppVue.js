@@ -11,9 +11,16 @@
             .container.has-text-centered
                 h1.title App Music
                 h2.subtitle Canciones que estan Vue-nisimas
-
+                app-player
                                
 </template>
+<script>
+    import AppPlayer from '@/components/player/Player.vue'
+    export default {
+      components: { AppPlayer }
+    }
+</script>
+
 <style lang="scss" scoped>
     .space-hero {
         margin-top: 8px;
