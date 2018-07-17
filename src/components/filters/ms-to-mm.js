@@ -1,11 +1,9 @@
 const msToMm = {}
 
 function convertMsToMm (ms) {
-  console.log('ms ', ms)
+  // seg = (ms / 1000 segundos) / 60 min
   const min = Math.floor(ms / 60000)
-  console.log('min ', min)
   const sec = (ms % 60000 / 1000).toFixed(0)
-  console.log('sec ', sec)
 
   return `${min}:${sec}`
 }
