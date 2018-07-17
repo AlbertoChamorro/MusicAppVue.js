@@ -1,1 +1,5 @@
-@import '../../node_modules/bulma/bulma';
+@import '~bulma/bulma';
+
+// $fa-font-path resolve problem with loaders in webpack
+$fa-font-path: "~/font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome';
