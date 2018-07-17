@@ -18,8 +18,11 @@
                     .level-left
                         a.level-item.has-text-primary(@click="playMusic")
                             span.icon.is-small
-                                i.fa.fa-caret-right.fa-2x                     
-
+                                i.fa.fa-caret-right.fa-2x
+                    .level-rigth
+                        a.level-item.has-text-primary(@click="showDetail(track.id)")
+                            span.icon.is-small.has-text-danger
+                                i.fa.fa-eye.fa-2x  
 </template>
 <script>
     export default {
@@ -32,6 +35,9 @@
 
           // emit event bus for component any
           this.$bus.$emit('play-music-handle', this.track)
+        },
+        showDetail: function (id) {
+          this.$router.push({ name: 'track-detail', params: { id } })
         }
       }
     }

@@ -1,5 +1,5 @@
 <template lang="pug">
-    .container
+    .container(v-if="track && track.album")
         p.is-128x128
             img(:src="track.album.images[0].url")
         p
