@@ -8,4 +8,8 @@ trackService.getAll = function (q) {
   return commonApiService.get('/search', params)
 }
 
+trackService.detail = function (id) {
+  return commonApiService.detail(`/tracks/${id}`)
+}
+
 export default trackService
