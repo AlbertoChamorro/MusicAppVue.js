@@ -18,6 +18,7 @@
                           type="text", 
                           placeholder="Search music...", 
                           v-model="searchText"
+                          @keyup.enter="search"
                         )
                     .control
                       a.button.is-primary.is-medium(@click="search") 
