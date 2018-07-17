@@ -7,10 +7,12 @@ import VueRouter from 'vue-router'
 import routes from '@/routes'
 
 import msToMm from '@/components/filters/ms-to-mm'
+import blur from '@/components/directives/blur'
 
 Vue.use(VueRouter)
 Vue.use(EventBus)
 Vue.use(msToMm)
+Vue.use(blur)
 
 const router = new VueRouter({
   routes,

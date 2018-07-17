@@ -39,6 +39,7 @@
         .columns.is-multiline
           .column.is-one-quarter(v-for="track in tracks") 
             app-track(
+                v-blur="track.preview_url"
                 :class="{ 'isPlayMusic': track.id === selectedTrackId }"
                 :track="track" 
                 @play-music="playMusic"
