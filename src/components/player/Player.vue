@@ -4,8 +4,7 @@
             img(:src="track.album.images[0].url")
         p
             strong {{ track.name }} 
-            span.has-text-black | 
-            small {{ track.duration_ms }}
+            small ({{ track.duration_ms | ms-to-mm }})
         p.audio
             audio(controls, :src="track.preview_url")
 </template>

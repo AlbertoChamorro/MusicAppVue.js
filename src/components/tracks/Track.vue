@@ -13,7 +13,7 @@
                         strong {{ track.name }}
                     p.subtitle.is-6 {{ track.artists[0].name }}
             .content
-                small.duration {{ track.duration_ms }}
+                small.duration {{ track.duration_ms | ms-to-mm }}
                 nav.level
                     .level-left
                         a.level-item.has-text-primary(@click="playMusic")
