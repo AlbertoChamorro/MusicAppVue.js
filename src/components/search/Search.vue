@@ -1,11 +1,11 @@
 <template lang="pug">
 
   main.has-background-white-ter
-
-    app-notification(:is-error="isError" v-show="notify")
-      p(slot="message") 
-        span(v-if="!isError") {{ searchResults }}
-        span(v-else) No se encontraron resultados.
+    transition(name="move")
+      app-notification(:is-error="isError" v-show="notify")
+        p(slot="message") 
+          span(v-if="!isError") {{ searchResults }}
+          span(v-else) No se encontraron resultados.
 
     section.section
       nav.nav.has-shadow
@@ -32,8 +32,8 @@
         .columns.is-centered
           .column 
               p.searchResults.has-text-dark.is-pulled-left {{ searchResults }}  
-
-      app-loader(v-show="isLoading")
+      transition(name="move")
+        app-loader(v-show="isLoading")
 
       .container.containerTrack
         .columns.is-multiline
