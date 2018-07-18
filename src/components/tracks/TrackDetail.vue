@@ -5,13 +5,14 @@
                 figure.media-left
                   p.image
                     img(:src="track.album.images[0].url")
-                  p 
-                    a.button.is-primary(@click="play") Rating
+                  p.button-bar
+                    a.button.is-primary(@click="play")
                       span.icon
+                        i.fa.fa-play
             .column.is-9
               .panel
                 .panel-heading
-                  h1.title {{ track.name }}
+                  h1.title {{ trackTitle }}
                 .panel-block
                   article.media
                     .media-content
@@ -26,32 +27,34 @@
 
 </template>
 <script>
-    import trackService from '@/services/track-service'
+    import { mapState, mapActions, mapGetters } from 'vuex'
     import trackMixin from '@/mixins/track'
 
     export default {
       mixins: [ trackMixin ],
-      data () {
-        return {
-          track: {}
-        }
-      },
       methods: {
-        detail: function (id) {
-          trackService.detail(id)
-            .then(res => {
-              this.track = res
-            })
-        }
+        ...mapActions(['getTrackById'])
+      },
+      computed: {
+        ...mapState(['track']),
+        ...mapGetters(['trackTitle'])
       },
       created () {
         const id = this.$route.params.id
-        this.detail(id)
+        if (!this.track || !this.track.id || this.track.id !== id) {
+          this.getTrackById({ id })
+            .then(() => {
+              console.log('finish loader track to api')
+            })
+        }
       }
     }
 </script>
 <style lang="scss" scoped>
     .columns {
         margin: 44px auto;
+    }
+    .button-bar {
+      margin-top: 20px; 
     }
 </style>
