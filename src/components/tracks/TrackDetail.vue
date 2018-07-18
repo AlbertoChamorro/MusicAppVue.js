@@ -1,14 +1,36 @@
 <template lang="pug">
     .container
-        .columns
-            .column.is-6.is-offset-3
-                 app-track(:track="track", v-if="track && track.album")
+        .columns(v-if="track && track.album")
+            .column.is-3.has-text-centered
+                figure.media-left
+                  p.image
+                    img(:src="track.album.images[0].url")
+                  p 
+                    a.button.is-primary(@click="play") Rating
+                      span.icon
+            .column.is-9
+              .panel
+                .panel-heading
+                  h1.title {{ track.name }}
+                .panel-block
+                  article.media
+                    .media-content
+                      .content
+                        ul(v-for="(value, key) in track")
+                          li
+                            strong {{ key }}:&nbsp;
+                            span {{ value }}
+                      nav.level
+                        .level-left
+                          a.level-item
+
 </template>
 <script>
-    import AppTrack from '@/components/tracks/Track'
     import trackService from '@/services/track-service'
+    import trackMixin from '@/mixins/track'
+
     export default {
-      components: { AppTrack },
+      mixins: [ trackMixin ],
       data () {
         return {
           track: {}

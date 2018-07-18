@@ -16,7 +16,7 @@
         }
       },
       created () {
-        this.$bus.$on('play-music-handle', track => {
+        this.$bus.$on('play-track', track => {
           this.track = track
         })
       }

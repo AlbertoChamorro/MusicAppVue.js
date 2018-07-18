@@ -16,7 +16,7 @@
                 small.duration {{ track.duration_ms | ms-to-mm }}
                 nav.level
                     .level-left
-                        button.level-item.button.is-primary(@click="playMusic")
+                        button.level-item.button.is-primary(@click="play")
                             span.icon.is-small
                                 i.fa.fa-caret-right.fa-2x
                     .level-rigth
@@ -25,19 +25,14 @@
                                 i.fa.fa-eye.fa-2x     
 </template>
 <script>
+    import trackMixin from '@/mixins/track'
+    
     export default {
+      mixins: [ trackMixin ],
       props: {
         track: { type: Object, required: true }
       },
       methods: {
-        playMusic: function () {
-          if (!this.track.preview_url) { return }
-
-          this.$emit('play-music', this.track.id)
-
-          // emit event bus for component any
-          this.$bus.$emit('play-music-handle', this.track)
-        },
         showDetail: function (id) {
           if (!this.track.preview_url) { return }
           this.$router.push({ name: 'track-detail', params: { id } })

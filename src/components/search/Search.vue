@@ -35,14 +35,14 @@
 
       app-loader(v-show="isLoading")
 
-      .container.containerMusic
+      .container.containerTrack
         .columns.is-multiline
           .column.is-one-quarter(v-for="track in tracks") 
             app-track(
                 v-blur="track.preview_url"
-                :class="{ 'isPlayMusic': track.id === selectedTrackId }"
+                :class="{ 'isSelectedTrack': track.id === selectedTrackId }"
                 :track="track" 
-                @play-music="playMusic"
+                @selected-track="selectedTrack"
             )
 
 </template>
@@ -87,8 +87,8 @@
         this.searchText = ''
         this.tracks = []
       },
-      playMusic: function (id) {
-        console.log(`playing music ${id}`)
+      selectedTrack: function (id) {
+        console.log(`selected track ${id}`)
         this.selectedTrackId = id
       }
     },
@@ -107,7 +107,7 @@
       }
     },
     created () {
-      this.searchText = 'te amo'
+      this.searchText = 'enamorame'
       this.search()
     }
   }
@@ -120,11 +120,11 @@
       font-size: smaller;
     }
 
-    .containerMusic{
+    .containerTrack{
       margin-top: 44px;
     }
 
-    .isPlayMusic{
+    .isSelectedTrack{
         border: 3px #23d160 solid;
     }
 </style>
