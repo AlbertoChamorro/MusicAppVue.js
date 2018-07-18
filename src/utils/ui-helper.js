@@ -1,5 +1,3 @@
-const blur = {}
-
 function setBlur (el, binding, newNode, oldNode) {
   el.style.filter = !binding.value ? 'blur(1.5px)' : 'none'
   el.style.cursor = !binding.value ? 'not-allowed' : 'inherint'
@@ -13,12 +11,6 @@ function setBlur (el, binding, newNode, oldNode) {
   })
 }
 
-blur.install = function (Vue) {
-  Vue.directive('blur', {
-    bind (el, binding) {
-      setBlur(el, binding)
-    }
-  })
+export default {
+  setBlur
 }
-
-export default blur
