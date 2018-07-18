@@ -13,30 +13,28 @@
                         strong {{ track.name }}
                     p.subtitle.is-6 {{ track.artists[0].name }}
             .content
-                small.duration {{ track.duration_ms }}
+                small.duration {{ track.duration_ms | ms-to-mm }}
                 nav.level
                     .level-left
-                        a.level-item.has-text-primary(@click="playMusic")
+                        button.level-item.button.is-primary(@click="play")
                             span.icon.is-small
                                 i.fa.fa-caret-right.fa-2x
                     .level-rigth
-                        a.level-item.has-text-primary(@click="showDetail(track.id)")
-                            span.icon.is-small.has-text-danger
-                                i.fa.fa-eye.fa-2x  
+                        button.level-item.button.is-warning(@click="showDetail(track.id)")
+                            span.icon.is-small
+                                i.fa.fa-eye.fa-2x     
 </template>
 <script>
+    import trackMixin from '@/mixins/track'
+    
     export default {
+      mixins: [ trackMixin ],
       props: {
         track: { type: Object, required: true }
       },
       methods: {
-        playMusic: function () {
-          this.$emit('play-music', this.track.id)
-
-          // emit event bus for component any
-          this.$bus.$emit('play-music-handle', this.track)
-        },
         showDetail: function (id) {
+          if (!this.track.preview_url) { return }
           this.$router.push({ name: 'track-detail', params: { id } })
         }
       }
